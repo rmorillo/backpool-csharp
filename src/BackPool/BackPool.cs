@@ -1,13 +1,13 @@
-﻿using LookBehindPool.Properties;
+﻿using BackPool.Properties;
 using System;
 
-namespace LookBehindPool
+namespace BackPool
 {
     /// <summary>
     /// Pre-allocated object pool where items are accessed from the last position and is useful for storing historical and time series data.
     /// Works like a circular buffer such that when maximum capacity reached, the last position rolls over to the start of the collection and overwrites the previous data.
     /// </summary>
-    public class LookBehindPool<T>
+    public abstract class BackPool<T>: IPoolReader<T>
     {
         #region Member variables
 
@@ -30,7 +30,7 @@ namespace LookBehindPool
         /// <param name='capacity'>
         /// The size of the buffer pool
         /// </param>
-        public LookBehindPool(int capacity, Func<T> initItem)
+        public BackPool(int capacity, Func<T> initItem)
         {
             _Items = new T[capacity];
 
@@ -45,23 +45,6 @@ namespace LookBehindPool
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Write the specified value to the current buffer.
-        /// </summary>
-        /// <param name='value'>
-        /// Value.
-        /// </param>
-        public void Update(Action<T> updateItem)
-        {
-            updateItem(_Items[_CurrentPosition]);
-            MoveForward();
-        }
-
-        public void Assign(T value)
-        {
-            _Items[_CurrentPosition] = value;
-            MoveForward();
-        }
 
         /// <summary>
         /// Moves object pool index to the next position.  Rolls over to index zero when Capacity is reached.
@@ -105,7 +88,7 @@ namespace LookBehindPool
                     targetIndex = absoluteIndex;
                 }
                 else
-                    throw new IndexOutOfRangeException(string.Format(Resources.LookBehindPool_GetAbsoluteIndex_PoolIndexOutOfRange, _Length - 1));
+                    throw new IndexOutOfRangeException(string.Format(Resources.BackPool_GetAbsoluteIndex_PoolIndexOutOfRange, _Length - 1));
             }
 
             return targetIndex;

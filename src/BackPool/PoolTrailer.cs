@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LookBehindPool
+namespace BackPool
 {
-    public class PoolReader<T>
+    public class PoolTrailercs<T>
     {
-        private LookBehindPool<T> _Pool;
+        private BackPool<T> _Pool;
 
-        public PoolReader(LookBehindPool<T> pool)
+        public PoolTrailercs(BackPool<T> pool)
         {
             _Pool = pool;
         }

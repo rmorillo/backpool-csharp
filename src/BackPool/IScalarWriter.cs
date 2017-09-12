@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LookBehindPool
+namespace BackPool
 {
-    public class LockFreeWriter<T>
+    public interface IScalarWriter<T>
     {
-
+        void Write(T value);
     }
 }

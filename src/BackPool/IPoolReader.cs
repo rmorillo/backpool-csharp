@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LookBehindPool
+namespace BackPool
 {
-    class FanOutTransit
+    public interface IPoolReader<T>
     {
     }
 }

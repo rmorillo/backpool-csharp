@@ -1,18 +1,18 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LookBehindPool;
+using BackPool;
 using System;
 
-namespace LookBehindPool.UnitTest
+namespace BackPool.UnitTest
 {
     [TestClass]
-    public class LookBehindPoolTest
+    public class ObjectPoolTest
     {
         [TestMethod]
-        public void LookBehindPool_Constructor_Works()
+        public void ObjectPool_Constructor_Works()
         {
             //Arrange & Act
             int capacity = 10;
-            var numberPool = new LookBehindPool<FloatPoolItem>(capacity, ( ) => new FloatPoolItem() { value = float.NaN });
+            var numberPool = new ObjectPool<FloatPoolItem>(capacity, ( ) => new FloatPoolItem() { value = float.NaN });
 
             //Assert
             Assert.IsNotNull(numberPool.Length == 0);
@@ -20,15 +20,15 @@ namespace LookBehindPool.UnitTest
         }
 
         [TestMethod]
-        public void LookBehindPool_Update_Works()
+        public void ObjectPool_Update_Works()
         {
             //Arrange
             int capacity = 10;
             var poolValue = 45;            
-            var pool = new LookBehindPool<FloatPoolItem>(capacity, () => new FloatPoolItem() { value = float.NaN });
+            var pool = new ObjectPool<FloatPoolItem>(capacity, () => new FloatPoolItem() { value = float.NaN });
 
             //Act
-            pool.Update((s) => s.value = poolValue);
+            pool.Write((s) => s.value = poolValue);
 
             //Assert
             Assert.AreEqual(pool.Length, 1);
@@ -37,16 +37,16 @@ namespace LookBehindPool.UnitTest
         }
 
         [TestMethod]
-        public void LookBehindPool_UpdateRollover_Works()
+        public void ObjectPool_UpdateRollover_Works()
         {
             //Arrange
             int capacity = 3;
-            var pool = new LookBehindPool<FloatPoolItem>(capacity, () => new FloatPoolItem() { value = float.NaN });
+            var pool = new ObjectPool<FloatPoolItem>(capacity, () => new FloatPoolItem() { value = float.NaN });
 
             //Act
-            pool.Update((s) => s.value = 2);
-            pool.Update((s) => s.value = 1);
-            pool.Update((s) => s.value = 0);
+            pool.Write((s) => s.value = 2);
+            pool.Write((s) => s.value = 1);
+            pool.Write((s) => s.value = 0);
 
             //Assert
             Assert.AreEqual(pool[0].value, 0);
@@ -55,12 +55,12 @@ namespace LookBehindPool.UnitTest
         }
 
         [TestMethod]
-        public void LookBehindPool_PoolIndexOutOfRange_ThrowsAnException()
+        public void ObjectPool_PoolIndexOutOfRange_ThrowsAnException()
         {
             //Arrange
             int capacity = 10;
-            var pool = new LookBehindPool<FloatPoolItem>(capacity, () => new FloatPoolItem() { value = float.NaN });
-            pool.Update((s) => s.value = 1);
+            var pool = new ObjectPool<FloatPoolItem>(capacity, () => new FloatPoolItem() { value = float.NaN });
+            pool.Write((s) => s.value = 1);
 
             //Act & Assert
 

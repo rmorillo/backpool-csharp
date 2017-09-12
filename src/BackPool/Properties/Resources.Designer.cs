@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LookBehindPool.Properties {
+namespace BackPool.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LookBehindPool.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LookBehindPool.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BackPool.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace LookBehindPool.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Pool index is out of range.  You can only use index values from 0 to {0}..
         /// </summary>
-        internal static string LookBehindPool_GetAbsoluteIndex_PoolIndexOutOfRange {
+        internal static string BackPool_GetAbsoluteIndex_PoolIndexOutOfRange {
             get {
-                return ResourceManager.GetString("LookBehindPool_GetAbsoluteIndex_PoolIndexOutOfRange", resourceCulture);
+                return ResourceManager.GetString("BackPool_GetAbsoluteIndex_PoolIndexOutOfRange", resourceCulture);
             }
         }
     }
